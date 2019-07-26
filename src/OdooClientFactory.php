@@ -12,7 +12,7 @@ namespace Ripoo;
  */
 class OdooClientFactory
 {
-    public function create(string $baseUrl, $db = null, $user = null, $password = null, $apiPath  = null) : OdooClient
+    public function create(string $baseUrl, $db = null, $user = null, $password = null, $apiPath  = null)
     {
         return new OdooClient($baseUrl, $db, $user, $password, $apiPath);
     }
@@ -28,7 +28,7 @@ class OdooClientFactory
      *
      * @return OdooClient
      */
-    public function createAuthenticated(string $baseUrl, string $db , string $user, string $password, $apiPath  = null) : OdooClient
+    public function createAuthenticated(string $baseUrl, string $db , string $user, string $password, $apiPath  = null)
     {
         return $this->create($baseUrl, $db, $user, $password, $apiPath);
     }
@@ -40,7 +40,7 @@ class OdooClientFactory
      * @param null|string $apiPath
      * @return OdooClient
      */
-    public function createAnonymous($baseUrl, $apiPath = null) : OdooClient
+    public function createAnonymous($baseUrl, $apiPath = null)
     {
         return $this->create($baseUrl, null, null, null, $apiPath);
     }
