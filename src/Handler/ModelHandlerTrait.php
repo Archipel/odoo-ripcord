@@ -158,28 +158,26 @@ trait ModelHandlerTrait
     }
 
     /**
-     * Search and Read model(s)
+     *  Search and Read model(s)
      *
-     * @param string $model Model
-     * @param array $criteria Array of criteria
-     * @param array $fields Index array of fields to fetch, an empty array fetches all fields
-     * @param integer $limit Max results
-     * @param string $order
+     * @param string $model
+     * @param array $criteria
+     * @param array $extra
      *
      * @return array An array of models
      * @throws AuthException|ResponseException
      */
-    public function search_read(string $model, array $criteria, array $fields = [], int $limit = 0, $order = '')
+    public function search_read(string $model, array $criteria, array $extra = [])
     {
+        $validExtra = ['fields' => [], 'offset' => 'none', 'limit' => 'all', 'order' => '', 'count' => false];
+        $extra = array_intersect_key($extra, $validExtra);
+
         $response = $this->getModelService()->execute_kw(
             $this->db, $this->uid(), $this->password,
             $model,
             'search_read',
             [$criteria],
-            [   'fields' => $fields,
-                'limit'  => $limit,
-                'order'  => $order,
-            ]
+            $extra
         );
         return $this->setResponse($response);
     }
