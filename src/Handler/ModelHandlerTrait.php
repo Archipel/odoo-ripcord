@@ -44,6 +44,13 @@ trait ModelHandlerTrait
         return $this->setResponse($response);
     }
 
+    public function __call($name, $args) {
+        $ids = count($args) > 1 ? $args[1] : [];
+        $args = count($args) > 2 ? array_slice($args, 2) : [];
+
+        return $this->model_execute_kw($args[0], $name, [$ids, $args]);
+    }
+
     /**
      * @param string $model
      * @param string $method
