@@ -47,7 +47,7 @@ trait ModelHandlerTrait
     public function __call($name, $args) {
         $ids = count($args) > 1 ? is_array($args[1]) ? $args[1] : [$args[1]] : [];
         $params = count($args) > 2 ? array_slice($args, 2) : [];
-        $idsAndParams = array_merge($ids, $params);
+        $idsAndParams = array_merge([$ids], $params);
 
         return $this->model_execute_kw($args[0], $name, $idsAndParams);
     }
